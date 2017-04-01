@@ -1,6 +1,6 @@
 /**
  * 
- * 替代 Promise， 我不喜欢 Promise，这不是 MinggePromise
+ * 类似 Promise
  * 
  * @license MIT
  * @author Octree <fouljz@gmail.com>
