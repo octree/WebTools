@@ -1,5 +1,4 @@
-# WebTools
+# WebUtils
 
-学 Web
-
-写着玩
+学习 Web，随便谢谢
+Async：类似 Promise
