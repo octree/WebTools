@@ -35,7 +35,7 @@ export class Async {
         })
     }
 
-    bind(transform) {
+    then(transform) {
         return new Async(callback => {
             this.excute((obj, err) => {
                 if (err == null) {
@@ -53,7 +53,7 @@ export class Async {
 
 (new Async(callback => {
     callback('hello world', null)
-})).bind(str => {
+})).then(str => {
     return Async.unit(str + ' !')
 }).fmap(str => {
     return 'Octree, ' + str
