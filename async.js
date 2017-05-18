@@ -15,7 +15,7 @@ export class Async {
     static unit(obj) {
 
         return new Async(callback => {
-            callback(obj, null)
+            callback(null, obj)
         })
     }
 
@@ -24,24 +24,18 @@ export class Async {
     }
 
     fmap(transform) {
-        return new Async(callback => {
-            this.excute((obj, err) => {
-                if (err == null) {
-                    callback(transform(obj), null)
-                } else {
-                    callback(null, err)
-                }
-            })
+        return this.then(obj => {
+            return Async.unit(transform(obj))
         })
     }
 
     then(transform) {
         return new Async(callback => {
-            this.excute((obj, err) => {
+            this.excute((err, obj) => {
                 if (err == null) {
                     transform(obj).excute(callback)
                 } else {
-                    callback(null, err)
+                    callback(err, obj)
                 }
             })
         })
@@ -49,14 +43,12 @@ export class Async {
 
 }
 
-//  { unit, Async };
-
 (new Async(callback => {
-    callback('hello world', null)
+    callback(null, 'hello')
 })).then(str => {
-    return Async.unit(str + ' !')
+    return Async.unit(str + '!')
 }).fmap(str => {
     return 'Octree, ' + str
-}).excute((obj, err) => {
+}).excute((err, obj) => {
     console.log(obj)
 })
